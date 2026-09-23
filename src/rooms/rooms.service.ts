@@ -18,6 +18,20 @@ export class RoomsService {
                 return room
             }
 
+    
+            async renameRoom (idRename: number, newName: string) {
+
+                const room = await this.prisma.room.update({
+                    where: {
+                        id: idRename
+                    },
+                    data: {
+                        name: newName
+                    }
+                })
+
+                return room
+            }
         
 
 }
