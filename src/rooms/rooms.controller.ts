@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Patch, Param, ParseIntPipe } from '@nestjs/common';
 import { RoomsService } from './rooms.service.js';
 import { CreateRoomDto } from './DTO/create-room.dto.js';
 
@@ -10,5 +10,12 @@ export class RoomsController {
     @Post()
     create(@Body() createRoomDto: CreateRoomDto){
         return this.roomsService.create(createRoomDto)
+    }
+
+    @Patch(':id')
+    renameRoom(
+    @Param('id', ParseIntPipe) id: number,    
+    @Body() newName: string ){
+        return this.roomsService.renameRoom(id, newName)
     }
 }
